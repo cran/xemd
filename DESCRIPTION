@@ -1,0 +1,92 @@
+Package: xemd
+Type: Package
+Title: eXtended Empirical Mode Decomposition
+Version: 0.1.5
+Authors@R: c(
+    person("Alejandro", "Verri Kozlowski", email = "averri@fi.uba.ar",
+        role = c("aut", "cre", "cph", "trl"),
+        comment = c(ORCID = "0000-0002-8535-1170")),
+    person("G.", "Rilling", role = "ctb", comment = "emd.m code"),
+    person("Marcelo A.", "Colominas", role = "cph",
+        comment = "CEEMDAN distribution of emd.m"),
+    person("Pierre", "Masselot", role = "ctb", comment = "emdr code"),
+    person("Vinícius", "Rezende Carvalho", role = c("ctb", "cph"),
+        comment = "ewtpy code"),
+    person("Eduardo", "Mazoni", role = "cph", comment = "ewtpy code"),
+    person("Jerome", "Gilles", role = c("ctb", "cph"),
+        comment = "pyewt code; MATLAB EWT code translated in ewtpy"),
+    person("Kathryn", "Heal", role = "ctb",
+        comment = "MATLAB EWT boundary detection translated in ewtpy"),
+    person("Emanuele", "Papini", role = c("ctb", "cph"), comment = "fifpy code"),
+    person("Antonio", "Cicone", role = "ctb",
+        comment = "MATLAB iterative filtering code translated in fifpy"),
+    person("Shubhra", "Prakash", role = "ctb", comment = "LMD code"),
+    person("Stefano", "Bianchi", role = c("ctb", "cph"),
+        comment = "pytvfemd code"),
+    person("Alessandro", "Longo", role = c("ctb", "cph"),
+        comment = "pytvfemd code"),
+    person("Eugene", "Brevdo", role = "ctb",
+        comment = "Synchrosqueezing Toolbox code ported in SynchWave"),
+    person("Hau-Tieng", "Wu", role = "ctb",
+        comment = "Synchrosqueezing Toolbox code ported in SynchWave"),
+    person("Jianfeng", "Lu", role = "ctb",
+        comment = "curve_ext of the Synchrosqueezing Toolbox, ported in SynchWave"),
+    person("Dongik", "Jang", role = "ctb", comment = "SynchWave code"),
+    person("Hee-Seok", "Oh", role = "ctb", comment = "SynchWave code"),
+    person("Donghoh", "Kim", role = "ctb", comment = "SynchWave code"))
+Description: Signals are decomposed into oscillatory modes by empirical mode
+    decomposition and its ensemble, complementary ensemble, complete
+    ensemble, masked, bivariate and multivariate variants, by variational
+    mode decomposition and its multivariate and successive variants, and by
+    local mean decomposition, iterative filtering, time varying filter
+    empirical mode decomposition and the empirical wavelet transform; the
+    synchrosqueezed wavelet transform is also provided. Empirical mode
+    decomposition is due to Huang et al. (1998)
+    <doi:10.1098/rspa.1998.0193>, its ensemble variant to Wu and Huang (2009)
+    <doi:10.1142/S1793536909000047> and variational mode decomposition to
+    Dragomiretskiy and Zosso (2014) <doi:10.1109/TSP.2013.2288675>. The
+    modes can be described by their instantaneous amplitude and frequency and
+    their Hilbert spectrum, tested as intrinsic mode functions or against
+    white noise, selected by energy and compared through orthogonality, mode
+    splitting, reconstruction quality, ensemble dispersion and similarity
+    measures. Acceleration, velocity and displacement records stored as a long
+    table of time, value, quantity and component are decomposed for every
+    record and quantity in one call, with a warning and a regularization of
+    the time grid when it is not uniform.
+URL: https://kanameishi.github.io/xemd/
+License: GPL-3
+Copyright: Authors, copyright notices and licenses of the third-party
+        code adapted in xemd are listed in file inst/NOTICE.
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports: data.table, pracma, splines, stats, utils
+Suggests: hht, knitr, rmarkdown
+VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2026-10-24 20:27:01 UTC; averrik
+Author: Alejandro Verri Kozlowski [aut, cre, cph, trl] (ORCID:
+    <https://orcid.org/0000-0002-8535-1170>),
+  G. Rilling [ctb] (emd.m code),
+  Marcelo A. Colominas [cph] (CEEMDAN distribution of emd.m),
+  Pierre Masselot [ctb] (emdr code),
+  Vinícius Rezende Carvalho [ctb, cph] (ewtpy code),
+  Eduardo Mazoni [cph] (ewtpy code),
+  Jerome Gilles [ctb, cph] (pyewt code; MATLAB EWT code translated in
+    ewtpy),
+  Kathryn Heal [ctb] (MATLAB EWT boundary detection translated in ewtpy),
+  Emanuele Papini [ctb, cph] (fifpy code),
+  Antonio Cicone [ctb] (MATLAB iterative filtering code translated in
+    fifpy),
+  Shubhra Prakash [ctb] (LMD code),
+  Stefano Bianchi [ctb, cph] (pytvfemd code),
+  Alessandro Longo [ctb, cph] (pytvfemd code),
+  Eugene Brevdo [ctb] (Synchrosqueezing Toolbox code ported in SynchWave),
+  Hau-Tieng Wu [ctb] (Synchrosqueezing Toolbox code ported in SynchWave),
+  Jianfeng Lu [ctb] (curve_ext of the Synchrosqueezing Toolbox, ported in
+    SynchWave),
+  Dongik Jang [ctb] (SynchWave code),
+  Hee-Seok Oh [ctb] (SynchWave code),
+  Donghoh Kim [ctb] (SynchWave code)
+Maintainer: Alejandro Verri Kozlowski <averri@fi.uba.ar>
+Repository: CRAN
+Date/Publication: 2026-11-08 17:10:02 UTC

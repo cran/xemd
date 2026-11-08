@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Introduction</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction</h1>
+
+
+
+<p>An observed signal can contain oscillations at different time scales,
+with amplitudes and frequencies that vary during the record. Empirical
+mode decomposition (EMD) uses the signal’s local extrema to construct
+components, rather than prescribing sinusoidal components of constant
+frequency. <code>xemd</code> provides EMD, its extensions and related
+decomposition methods, followed by operations for examining and
+reconstructing their outputs.</p>
+<p>This guide follows two examples: successive extraction by EMD and
+joint fitting by variational mode decomposition (VMD). They illustrate
+different meanings of a mode, the controls used to obtain it and the
+diagnostics returned by the calculation. The <a href="https://kanameishi.github.io/xemd/articles/methods.html">methods
+guide</a> covers the other families, and <a href="https://kanameishi.github.io/xemd/articles/validation.html">validation
+and interpretation</a> explains the evidence needed to select
+components.</p>
+<div id="modes-and-intrinsic-mode-functions" class="section level2">
+<h2>Modes and intrinsic mode functions</h2>
+<p>A mode is a component of a decomposition. In EMD, the target
+component is an intrinsic mode function (IMF): its numbers of extrema
+and zero crossings differ by at most one, and the mean of its upper and
+lower envelopes is zero at each point. These conditions describe
+oscillation geometry; they allow amplitude and frequency to vary and do
+not require a sinusoid of constant frequency. The envelope mean is
+different from the average of all samples.</p>
+<p>Sifting repeatedly subtracts the envelope mean to approach those
+conditions. A numerical stopping rule specifies how that process ends;
+an iteration limit or a prescribed number of subtractions is not proof
+that the ideal IMF conditions hold. The returned diagnostics distinguish
+those outcomes.</p>
+<p>The residual signal is what remains after extraction. It can contain
+a trend or a constant, and remains part of the additive reconstruction.
+Neither exact reconstruction nor approximate IMF conditions establish
+that a mode is a separate physical source. Different representations can
+reconstruct the same signal, and one physical oscillation can be spread
+over several extracted components.</p>
+</div>
+<div id="data-model" class="section level2">
+<h2>Data model</h2>
+<p><code>decomposeEMD()</code> and <code>decomposeVMD()</code> receive a
+finite numeric vector <code>signal</code>, in the units of the measured
+quantity. EMD operates on sample positions. VMD also receives
+<code>samplingInterval</code> in seconds and center frequencies in Hz.
+The <a href="https://kanameishi.github.io/xemd/articles/seismic.html">seismic
+records guide</a> describes the long-table interface for records,
+quantities and components.</p>
+<p>The returned list depends on the method. For the EMD and VMD
+examples, the fields have the following meanings:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>EMD</th>
+<th>VMD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>modes</code></td>
+<td>Matrix of samples by extracted modes</td>
+<td>Matrix of samples by the prescribed modes</td>
+</tr>
+<tr class="even">
+<td>Remainder</td>
+<td><code>residue</code>, left after successive extractions</td>
+<td><code>fitResidual</code>, the input minus the sum of the fitted
+modes</td>
+</tr>
+<tr class="odd">
+<td><code>iterations</code></td>
+<td>Number of sifting subtractions for each mode</td>
+<td>Number of joint sweeps, repeated for each mode</td>
+</tr>
+<tr class="even">
+<td><code>converged</code></td>
+<td>Acceptance of each mode by its sifting rule</td>
+<td>Result of the joint stopping test, repeated for each mode</td>
+</tr>
+<tr class="odd">
+<td><code>stopReason</code></td>
+<td>Reason extraction ended</td>
+<td>Reason the joint iteration ended</td>
+</tr>
+<tr class="even">
+<td><code>centers</code></td>
+<td>Absent</td>
+<td>Final center frequencies in Hz</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="empirical-mode-decomposition" class="section level2">
+<h2>Empirical mode decomposition</h2>
+<p>EMD extracts a mode from the current residue and subtracts it before
+the next extraction. Within an extraction, sifting subtracts the mean of
+the upper and lower envelopes until the selected rule accepts the mode
+or the iteration ends. The example signal contains three sines and a
+trend, sampled at 3000 points. Its controls select the double-threshold
+rule, reflected boundaries and up to 2000 sifting subtractions per mode;
+<code>maxModes = Inf</code> lets the residue determine when extraction
+ends.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(xemd)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>Time <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>, <span class="at">length.out =</span> <span class="dv">3000</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>Signal <span class="ot">&lt;-</span> <span class="fu">sin</span>(pi <span class="sc">*</span> Time) <span class="sc">+</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> Time) <span class="sc">+</span> <span class="fu">sin</span>(<span class="dv">6</span> <span class="sc">*</span> pi <span class="sc">*</span> Time) <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="fl">0.5</span> <span class="sc">*</span> Time</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>Sifting <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">stopRule =</span> <span class="st">&quot;doubleThreshold&quot;</span>, <span class="at">thresholds =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.5</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>                <span class="at">fraction =</span> <span class="fl">0.05</span>, <span class="at">maxSift =</span> <span class="dv">2000</span>, <span class="at">boundary =</span> <span class="st">&quot;reflection&quot;</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>                <span class="at">maxModes =</span> <span class="cn">Inf</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>EMD <span class="ot">&lt;-</span> <span class="fu">decomposeEMD</span>(Signal, <span class="at">sifting =</span> Sifting)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">str</span>(EMD)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co">#&gt; List of 5</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co">#&gt;  $ modes     : num [1:3000, 1:3] -0.815 -0.733 -0.652 -0.572 -0.492 ...</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co">#&gt;  $ residue   : num [1:3000] 0.468 0.467 0.467 0.467 0.466 ...</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co">#&gt;  $ iterations: int [1:3] 2 4 2</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co">#&gt;  $ converged : logi [1:3] TRUE TRUE TRUE</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co">#&gt;  $ stopReason: chr &quot;insufficientExtrema&quot;</span></span></code></pre></div>
+<p><code>EMD$converged</code> describes the individual extractions:
+<code>TRUE</code> means that the stopping rule accepted the mode;
+<code>FALSE</code> means that <code>maxSift</code> was reached or that
+the envelopes could not be built. The fixed-sifting rule, available
+through <code>decomposeEMD()</code>, instead reports <code>NA</code>
+because it performs a prescribed number of subtractions.</p>
+<p><code>EMD$stopReason</code> describes the outer extraction process.
+<code>&quot;terminalResidue&quot;</code> means that the remaining signal has at
+most one extremum; <code>&quot;modeLimit&quot;</code> means that the requested
+extraction limit was reached; <code>&quot;insufficientExtrema&quot;</code> means
+that the boundary rule could not build the next envelopes. These reasons
+are separate from the acceptance of each extracted mode.</p>
+<p>The controls affect the decomposition itself. Envelope construction
+near the record boundaries affects the extracted components, and
+additional sifting can alter their amplitude modulation. The example’s
+controls are not a universal setting for another signal.</p>
+<p>The sum of the modes and the residue reconstructs the signal up to
+rounding. The following expression reports the largest absolute
+reconstruction difference in the units of the input signal.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">rowSums</span>(EMD<span class="sc">$</span>modes) <span class="sc">+</span> EMD<span class="sc">$</span>residue <span class="sc">-</span> Signal))</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; [1] 1.776357e-15</span></span></code></pre></div>
+<p>This difference checks the additive identity. It does not measure
+whether each extracted component matches a generating oscillation of the
+signal.</p>
+<p><code>assessIMF()</code> provides numerical diagnostics of the IMF
+conditions for each column. The <code>count</code> result tests whether
+the numbers of extrema and zero crossings differ by at most one. The
+<code>deviation</code> result tests the envelope mean relative to the
+envelope amplitude with the double threshold, an approximation to the
+ideal zero envelope mean; it is <code>NA</code> when the boundary rule
+cannot construct the envelopes. The example also passes the residue as
+the final column, so its diagnosis remains distinct from those of the
+extracted modes.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">assessIMF</span>(<span class="fu">cbind</span>(EMD<span class="sc">$</span>modes, EMD<span class="sc">$</span>residue))</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; $count</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; [1]  TRUE  TRUE  TRUE FALSE</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; $deviation</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; [1] TRUE TRUE TRUE   NA</span></span></code></pre></div>
+</div>
+<div id="variational-mode-decomposition" class="section level2">
+<h2>Variational mode decomposition</h2>
+<p>VMD fits a prescribed number of modes concentrated around center
+frequencies. It updates the mode spectra, their centers and a multiplier
+together. The length of <code>initialCenters</code> sets the number of
+modes; <code>fixedZeroCenter = FALSE</code> allows every center to
+change. VMD modes are not defined by imposing the geometric IMF
+conditions of EMD. Their defining property in this formulation is the
+bandwidth objective. An IMF diagnostic can still be computed for them,
+but it tests a property additional to that objective.</p>
+<p>The signal contains tones of 2, 24 and 288 Hz sampled every
+millisecond. <code>initialCenters</code> is in Hz and
+<code>alpha</code>, the bandwidth penalty, is in <span class="math inline">\(\mathrm{s}^2\)</span>. The expression for
+<code>alpha</code> converts the value 2000 from the cycles-per-sample
+convention used by sktime and VMDecomp into the units used by xemd. A
+positive <code>tau</code> selects the constrained problem;
+<code>tau = 0</code> selects the penalized problem with a zero
+multiplier.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>SamplingInterval <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>TimeV <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(<span class="dv">1000</span>) <span class="sc">*</span> SamplingInterval</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>SignalV <span class="ot">&lt;-</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> TimeV) <span class="sc">+</span> <span class="fl">0.25</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="dv">24</span> <span class="sc">*</span> TimeV) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="fl">0.0625</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="dv">288</span> <span class="sc">*</span> TimeV)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>VMD <span class="ot">&lt;-</span> <span class="fu">decomposeVMD</span>(SignalV, <span class="at">samplingInterval =</span> SamplingInterval,</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>                    <span class="at">initialCenters =</span> (<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">/</span> (<span class="dv">6</span> <span class="sc">*</span> SamplingInterval),</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>                    <span class="at">alpha =</span> <span class="dv">2000</span> <span class="sc">*</span> SamplingInterval<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">8</span> <span class="sc">*</span> pi<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>                    <span class="at">tau =</span> <span class="fl">0.5</span>, <span class="at">fixedZeroCenter =</span> <span class="cn">FALSE</span>, <span class="at">tolerance =</span> <span class="dv">1</span>e<span class="sc">-</span><span class="dv">6</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>                    <span class="at">maxIterations =</span> <span class="dv">98</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>VMD<span class="sc">$</span>centers</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; [1]   2.000004  23.999532 287.962079</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>VMD<span class="sc">$</span>stopReason</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tolerance&quot;</span></span></code></pre></div>
+<p><code>VMD$centers</code> contains the final center frequencies. A
+<code>stopReason</code> of <code>&quot;tolerance&quot;</code> means that the
+relative change of the mode spectra passed the stopping test;
+<code>&quot;iterationLimit&quot;</code> means that the last permitted sweep was
+reached. In either case the returned modes come from the last sweep.
+<code>VMD$fitResidual</code> contains the difference between the signal
+and their sum; with <code>tau = 0</code>, the formulation permits a
+nonzero fit residual.</p>
+<p>The prescribed mode count and bandwidth penalty affect how
+oscillations are distributed among the modes. Passing the stopping test
+indicates small changes between iterations; it does not certify a global
+optimum or a physically unique decomposition. The returned center
+frequency summarizes a mode’s spectral concentration and is not its
+instantaneous frequency at every sample.</p>
+</div>
+<div id="instantaneous-attributes-and-hilbert-spectrum" class="section level2">
+<h2>Instantaneous attributes and Hilbert spectrum</h2>
+<p>The Hilbert transform associates each real component with an analytic
+signal. Its magnitude gives amplitude and its angle gives phase. The
+time derivative of phase in radians, divided by <span class="math inline">\(2\pi\)</span>, gives instantaneous frequency in Hz
+when time is in seconds. Applying this operation to a sum of
+oscillations produces the phase of that sum, not the individual
+frequencies of its summands; decomposition therefore precedes this part
+of Hilbert-Huang analysis.</p>
+<p><code>computeInstantaneousAttributes()</code> returns matrices of
+amplitude, phase and frequency, with samples in rows and modes in
+columns. Amplitude has the units of the input modes, phase is in radians
+and frequency is in Hz. The EMD example uses a time step of 9 / 2999
+seconds; the expression below reports the median frequency of each
+mode.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>Attributes <span class="ot">&lt;-</span> <span class="fu">computeInstantaneousAttributes</span>(EMD<span class="sc">$</span>modes,</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>                                             <span class="at">samplingInterval =</span> <span class="dv">9</span> <span class="sc">/</span> <span class="dv">2999</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">apply</span>(Attributes<span class="sc">$</span>frequency, <span class="dv">2</span>, stats<span class="sc">::</span>median)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; [1] 2.9992761 0.9952460 0.4857283</span></span></code></pre></div>
+<p>The analytic signal is computed by a discrete Fourier transform,
+which implies periodic extension of the record. Phase is continuous
+within runs of nonzero analytic amplitude; a zero leaves the phase
+undefined and starts a new run. Frequency uses neighboring phase values
+and is <code>NA</code> where the required phase values are
+undefined.</p>
+<p>Small analytic amplitude can make the phase derivative sensitive to
+the signal, and the periodic extension can affect the record boundaries.
+The resulting frequency is a property of the analyzed component; its
+physical interpretation also depends on how that component was
+separated.</p>
+<p><code>buildHilbertSpectrum()</code> places each instantaneous
+amplitude into the cell containing its frequency, sample by sample. With
+<code>exponent = 2</code>, it accumulates squared amplitudes. The edges
+in this example define the intervals <span class="math inline">\([1,2)\)</span>, <span class="math inline">\([2,3)\)</span>, <span class="math inline">\([3,4)\)</span> and <span class="math inline">\([4,5)\)</span> in Hz. Frequencies outside these
+intervals or equal to <code>NA</code> contribute nothing.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>Spectrum <span class="ot">&lt;-</span> <span class="fu">buildHilbertSpectrum</span>(Attributes<span class="sc">$</span>frequency, Attributes<span class="sc">$</span>amplitude,</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>                                 <span class="at">edges =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), <span class="at">exponent =</span> <span class="dv">2</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                                 <span class="at">samplingInterval =</span> <span class="dv">9</span> <span class="sc">/</span> <span class="dv">2999</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>Spectrum<span class="sc">$</span>marginal</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; [1] 3.44528895 4.71656719 4.12037251 0.05831411</span></span></code></pre></div>
+<p><code>Spectrum$spectrum</code> holds samples by frequency cells, in
+squared signal units for this example. <code>Spectrum$marginal</code>
+sums each cell over time and multiplies by the sampling interval, giving
+squared signal units times seconds. The values are cell masses; no
+division by frequency-cell width is applied.</p>
+<p>The marginal spectrum accumulates contributions over time and
+therefore does not retain when an oscillation occurred. It is
+constructed from instantaneous amplitude and frequency and is not a
+Fourier spectrum.</p>
+</div>
+<div id="further-reading" class="section level2">
+<h2>Further reading</h2>
+<p>The <a href="https://kanameishi.github.io/xemd/articles/methods.html">methods
+guide</a> describes method concepts, controls and termination. The help
+pages for <code>decomposeEMD()</code>, <code>decomposeVMD()</code>,
+<code>assessIMF()</code>, <code>computeInstantaneousAttributes()</code>
+and <code>buildHilbertSpectrum()</code> specify their arguments,
+returned values and references. <code>listOperations()</code> lists the
+exported functions and their formal argument names.</p>
+<p>The <a href="https://kanameishi.github.io/xemd/articles/references.html">bibliography</a>
+lists the published work on the methods.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

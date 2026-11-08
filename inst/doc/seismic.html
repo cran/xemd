@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Seismic records</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Seismic records</h1>
+
+
+
+<p>Seismic records can be examined through acceleration (AT), velocity
+(VT) and displacement (DT). When VT and DT are obtained by integrating
+the same acceleration record, they describe related quantities,
+including the propagation of its contamination. Their modal
+decompositions need not contain corresponding oscillations at the same
+mode index.</p>
+<p>This guide explains how <code>xemd</code> groups supplied records,
+applies a selected decomposition and reconstructs a declared selection.
+The synthetic examples demonstrate that interface. The physical
+relationship between the quantities remains a separate part of
+interpreting the result.</p>
+<div id="acceleration-velocity-and-displacement" class="section level2">
+<h2>Acceleration, velocity and displacement</h2>
+<p>Integration changes the relative contribution of frequency
+components. It can also change the extrema on which EMD builds its
+envelopes. Consequently, integrating an acceleration mode is a different
+operation from decomposing the integrated velocity or displacement, and
+neither operation guarantees a mode-by-mode correspondence with the
+other.</p>
+<p><code>decomposeTSL()</code> groups by record and quantity. With a
+scalar method it decomposes each component separately; with a coupled
+method it decomposes the channels of one quantity together. It does not
+couple AT, VT and DT through a kinematic constraint. The labels in the
+table identify the supplied quantities; the function does not infer,
+validate or convert their units.</p>
+<p>Selecting the same mode index from AT, VT and DT therefore does not
+by itself select the same physical contribution. Similarly, the validity
+of a noise threshold depends on the quantity and noise model:
+integration does not preserve a white-noise interpretation unchanged.
+These distinctions matter when interpreting a reconstruction as retained
+motion.</p>
+</div>
+<div id="the-long-table" class="section level2">
+<h2>The long table</h2>
+<p>Each row of the table holds a time <code>t</code> in seconds, a
+sample <code>s</code>, the quantity <code>ID</code> and the component
+<code>OCID</code>. <code>ID</code> takes values such as
+<code>&quot;AT&quot;</code>, <code>&quot;VT&quot;</code> and <code>&quot;DT&quot;</code>;
+<code>OCID</code> keeps the identifier of the provider. The other
+columns are metadata, and <code>by</code> names those that identify a
+record. A group is a record and an <code>ID</code>; its
+<code>OCID</code> are the channels of the group and share one time
+grid.</p>
+<p>The table below holds one record, <code>R1</code>, with five
+quantities and three components. Its series are three synthetic signals
+rotated across the quantities, so that every component of a quantity has
+its own series; they are not acceleration, velocity and displacement
+related by integration.</p>
+<p>The repeated labels make the grouping and returned tables visible.
+This example does not establish a physical filtering criterion for AT,
+VT or DT.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(xemd)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>Time <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>, <span class="at">length.out =</span> <span class="dv">3000</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>Channels <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">sin</span>(pi <span class="sc">*</span> Time) <span class="sc">+</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> Time) <span class="sc">+</span> <span class="fu">sin</span>(<span class="dv">6</span> <span class="sc">*</span> pi <span class="sc">*</span> Time) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>                      <span class="fl">0.5</span> <span class="sc">*</span> Time,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>                  <span class="fu">sin</span>(pi <span class="sc">*</span> Time), <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> Time))</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>IDs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AT&quot;</span>, <span class="st">&quot;VT&quot;</span>, <span class="st">&quot;DT&quot;</span>, <span class="st">&quot;AI&quot;</span>, <span class="st">&quot;CAV&quot;</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>OCIDs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;H1&quot;</span>, <span class="st">&quot;H2&quot;</span>, <span class="st">&quot;UP&quot;</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>TSL <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(<span class="fu">seq_along</span>(IDs), <span class="cf">function</span>(i) {</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(<span class="fu">seq_along</span>(OCIDs), <span class="cf">function</span>(j) {</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>        <span class="fu">data.table</span>(<span class="at">RecordID =</span> <span class="st">&quot;R1&quot;</span>, <span class="at">DIR =</span> OCIDs[j], <span class="at">ID =</span> IDs[i],</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>                   <span class="at">OCID =</span> OCIDs[j], <span class="at">t =</span> Time,</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>                   <span class="at">s =</span> Channels[, (i <span class="sc">+</span> j <span class="sc">-</span> <span class="dv">2</span>) <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    }))</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>}))</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>TSL[, .N, by <span class="ot">=</span> .(RecordID, ID, OCID)]</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="co">#&gt;     RecordID     ID   OCID     N</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="co">#&gt;       &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;int&gt;</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="co">#&gt;  1:       R1     AT     H1  3000</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="co">#&gt;  2:       R1     AT     H2  3000</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="co">#&gt;  3:       R1     AT     UP  3000</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="co">#&gt;  4:       R1     VT     H1  3000</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="co">#&gt;  5:       R1     VT     H2  3000</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="co">#&gt;  6:       R1     VT     UP  3000</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="co">#&gt;  7:       R1     DT     H1  3000</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="co">#&gt;  8:       R1     DT     H2  3000</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="co">#&gt;  9:       R1     DT     UP  3000</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="co">#&gt; 10:       R1     AI     H1  3000</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="co">#&gt; 11:       R1     AI     H2  3000</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="co">#&gt; 12:       R1     AI     UP  3000</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="co">#&gt; 13:       R1    CAV     H1  3000</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="co">#&gt; 14:       R1    CAV     H2  3000</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="co">#&gt; 15:       R1    CAV     UP  3000</span></span></code></pre></div>
+</div>
+<div id="methods" class="section level2">
+<h2>Methods</h2>
+<p><code>listDecompositions()</code> returns the methods that the
+operation accepts.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">listDecompositions</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;decomposeEMD&quot;               &quot;decomposeEEMD&quot;             </span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt;  [3] &quot;decomposeCEEMD&quot;             &quot;decomposeCEEMDAN&quot;          </span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt;  [5] &quot;decomposeICEEMDAN&quot;          &quot;decomposeMaskedEMD&quot;        </span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;decomposeIteratedMaskedEMD&quot; &quot;decomposeVMD&quot;              </span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt;  [9] &quot;decomposeSVMD&quot;              &quot;decomposeLMD&quot;              </span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; [11] &quot;decomposeIF&quot;                &quot;decomposeEWT&quot;              </span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; [13] &quot;decomposeTVFEMD&quot;            &quot;decomposeBEMD&quot;             </span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; [15] &quot;decomposeMEMD&quot;              &quot;decomposeNAMEMD&quot;           </span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; [17] &quot;decomposeMVMD&quot;</span></span></code></pre></div>
+<p><code>control</code> is a named list of the arguments of the method,
+common to every group. The operation derives <code>signal</code> and
+<code>samplingInterval</code> from each group; the ensembles receive
+<code>realizationCount</code> in place of <code>noise</code>, and
+NA-MEMD <code>noiseChannelCount</code> and <code>noiseRatio</code> in
+place of <code>noiseChannels</code>. Controls in the units of the signal
+are rejected, because the quantities do not share units.</p>
+</div>
+<div id="a-scalar-method" class="section level2">
+<h2>A scalar method</h2>
+<p>A scalar method decomposes each component separately with the same
+controls.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>Input <span class="ot">&lt;-</span> <span class="fu">copy</span>(TSL)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>OUT <span class="ot">&lt;-</span> <span class="fu">decomposeTSL</span>(TSL, <span class="at">method =</span> <span class="st">&quot;decomposeEMD&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>                    <span class="at">control =</span> <span class="fu">list</span>(<span class="at">sifting =</span> <span class="fu">list</span>(<span class="at">stopRule =</span> <span class="st">&quot;doubleThreshold&quot;</span>)),</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>                    <span class="at">by =</span> <span class="st">&quot;RecordID&quot;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">names</span>(OUT)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;signal&quot;      &quot;modes&quot;       &quot;residue&quot;     &quot;diagnostics&quot; &quot;termination&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>OUT<span class="sc">$</span>termination</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt;     RecordID    DIR   OCID     ID          stopReason</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt;       &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;char&gt;              &lt;char&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt;  1:       R1     H1     H1     AT insufficientExtrema</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt;  2:       R1     H1     H1     VT     terminalResidue</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt;  3:       R1     H1     H1     DT     terminalResidue</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt;  4:       R1     H1     H1     AI insufficientExtrema</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt;  5:       R1     H1     H1    CAV     terminalResidue</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt;  6:       R1     H2     H2     AT     terminalResidue</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt;  7:       R1     H2     H2     VT     terminalResidue</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt;  8:       R1     H2     H2     DT insufficientExtrema</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#&gt;  9:       R1     H2     H2     AI     terminalResidue</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="co">#&gt; 10:       R1     H2     H2    CAV     terminalResidue</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="co">#&gt; 11:       R1     UP     UP     AT     terminalResidue</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="co">#&gt; 12:       R1     UP     UP     VT insufficientExtrema</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="co">#&gt; 13:       R1     UP     UP     DT     terminalResidue</span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="co">#&gt; 14:       R1     UP     UP     AI     terminalResidue</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="co">#&gt; 15:       R1     UP     UP    CAV insufficientExtrema</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>OUT<span class="sc">$</span>diagnostics[ID <span class="sc">==</span> <span class="st">&quot;AT&quot;</span>]</span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co">#&gt;    RecordID    DIR   OCID     ID  mode iterations converged</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="co">#&gt;      &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;int&gt;      &lt;int&gt;    &lt;lgcl&gt;</span></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="co">#&gt; 1:       R1     H1     H1     AT     1          2      TRUE</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="co">#&gt; 2:       R1     H1     H1     AT     2          4      TRUE</span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="co">#&gt; 3:       R1     H1     H1     AT     3          2      TRUE</span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="co">#&gt; 4:       R1     H2     H2     AT     1          0      TRUE</span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="co">#&gt; 5:       R1     UP     UP     AT     1          0      TRUE</span></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a><span class="fu">identical</span>(Input, TSL)</span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p>Groups follow <code>by</code> and the quantities <code>AT</code>,
+<code>VT</code> and <code>DT</code> before the other quantities;
+components ascend. The order of the rows of the input does not
+intervene. Every table carries the <code>by</code> columns, the other
+metadata, <code>OCID</code> and <code>ID</code>. <code>signal</code>
+holds the decomposed series, <code>modes</code> the modes with their
+index <code>mode</code>, <code>residue</code> the residue,
+<code>diagnostics</code> the iterations and the convergence of each
+mode, and <code>termination</code> the <code>stopReason</code> of each
+series, or the rows of the native termination table of EEMD, CEEMD,
+MaskedEMD and BEMD. Each component keeps its own number of modes,
+without padding.</p>
+<p>The <code>signal</code> table is the input actually decomposed. The
+<code>modes</code> and <code>residue</code> tables give its additive
+representation; <code>diagnostics</code> and <code>termination</code>
+describe numerical extraction. A mode index identifies a position in
+that decomposition, not a shared physical source across independently
+processed series.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>OUT<span class="sc">$</span>modes[, .N, by <span class="ot">=</span> .(OCID, ID, mode)][<span class="fu">order</span>(OCID, ID, mode)][<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt;      OCID     ID  mode     N</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt;    &lt;char&gt; &lt;char&gt; &lt;int&gt; &lt;int&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; 1:     H1     AI     1  3000</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; 2:     H1     AI     2  3000</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; 3:     H1     AI     3  3000</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 4:     H1     AT     1  3000</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; 5:     H1     AT     2  3000</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; 6:     H1     AT     3  3000</span></span></code></pre></div>
+</div>
+<div id="a-coupled-method" class="section level2">
+<h2>A coupled method</h2>
+<p>A coupled method decomposes the components of a group together, so
+its modes stay aligned across components. The record below holds three
+tones of 2, 24 and 288 Hz and two of them as separate components,
+sampled every millisecond; <code>decomposeMVMD()</code> shares its
+centers across the components, and they repeat for every
+<code>OCID</code>.</p>
+<p>The common center describes spectral alignment within this AT group.
+It does not require identical component amplitudes or instantaneous
+frequencies, and does not establish correspondence with a separate VT or
+DT decomposition.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>TimeV <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(<span class="dv">1000</span>) <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>SeriesV <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> TimeV) <span class="sc">+</span> <span class="fl">0.25</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="dv">24</span> <span class="sc">*</span> TimeV) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>                     <span class="fl">0.0625</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="dv">288</span> <span class="sc">*</span> TimeV),</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>                 <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> TimeV), <span class="fl">0.25</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="dv">24</span> <span class="sc">*</span> TimeV))</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>Record <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">ID =</span> <span class="st">&quot;AT&quot;</span>, <span class="at">OCID =</span> <span class="fu">rep</span>(OCIDs, <span class="at">each =</span> <span class="dv">1000</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>                     <span class="at">t =</span> <span class="fu">rep</span>(TimeV, <span class="dv">3</span>), <span class="at">s =</span> <span class="fu">as.vector</span>(SeriesV))</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>Control <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">initialCenters =</span> (<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">/</span> (<span class="dv">6</span> <span class="sc">/</span> <span class="dv">1000</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>                <span class="at">alpha =</span> <span class="dv">2000</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="dv">1000</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">8</span> <span class="sc">*</span> pi<span class="sc">^</span><span class="dv">2</span>), <span class="at">tau =</span> <span class="fl">0.5</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>                <span class="at">fixedZeroCenter =</span> <span class="cn">FALSE</span>, <span class="at">tolerance =</span> <span class="dv">1</span>e<span class="sc">-</span><span class="dv">6</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>                <span class="at">maxIterations =</span> <span class="dv">98</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>Coupled <span class="ot">&lt;-</span> <span class="fu">decomposeTSL</span>(Record, <span class="at">method =</span> <span class="st">&quot;decomposeMVMD&quot;</span>, <span class="at">control =</span> Control,</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>                        <span class="at">by =</span> <span class="fu">character</span>())</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="fu">names</span>(Coupled)</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; [1] &quot;signal&quot;      &quot;modes&quot;       &quot;fitResidual&quot; &quot;diagnostics&quot; &quot;termination&quot;</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; [6] &quot;centers&quot;</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>Coupled<span class="sc">$</span>centers</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt;      OCID     ID  mode  frequency</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co">#&gt;    &lt;char&gt; &lt;char&gt; &lt;int&gt;      &lt;num&gt;</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; 1:     H1     AT     1   2.000017</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co">#&gt; 2:     H1     AT     2  23.999987</span></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co">#&gt; 3:     H1     AT     3 287.943889</span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co">#&gt; 4:     H2     AT     1   2.000017</span></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a><span class="co">#&gt; 5:     H2     AT     2  23.999987</span></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co">#&gt; 6:     H2     AT     3 287.943889</span></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="co">#&gt; 7:     UP     AT     1   2.000017</span></span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a><span class="co">#&gt; 8:     UP     AT     2  23.999987</span></span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a><span class="co">#&gt; 9:     UP     AT     3 287.943889</span></span></code></pre></div>
+</div>
+<div id="grids-that-are-not-uniform" class="section level2">
+<h2>Grids that are not uniform</h2>
+<p>The decompositions need a uniform grid. When the times of a group are
+not uniform, the operation constructs a regular grid, interpolates its
+components and emits one warning per group. The first time is retained;
+the <a href="https://kanameishi.github.io/xemd/reference/decomposeTSL.html">function
+reference</a> specifies the grid rule and interpolation. The returned
+<code>signal</code> table contains the resampled input used for
+decomposition. Below, the central sample of two series is displaced by
+half a step.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>Displaced <span class="ot">&lt;-</span> Time</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>Displaced[<span class="dv">1501</span>] <span class="ot">&lt;-</span> Time[<span class="dv">1501</span>] <span class="sc">+</span> <span class="dv">9</span> <span class="sc">/</span> <span class="dv">2999</span> <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>Irregular <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(<span class="fu">c</span>(<span class="st">&quot;AT&quot;</span>, <span class="st">&quot;VT&quot;</span>), <span class="cf">function</span>(id) {</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    <span class="fu">data.table</span>(<span class="at">ID =</span> id, <span class="at">OCID =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;H1&quot;</span>, <span class="st">&quot;H2&quot;</span>), <span class="at">each =</span> <span class="dv">3000</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>               <span class="at">t =</span> <span class="fu">rep</span>(Displaced, <span class="dv">2</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>               <span class="at">s =</span> <span class="fu">c</span>(<span class="fu">sin</span>(pi <span class="sc">*</span> Displaced) <span class="sc">+</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> Displaced) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>                         <span class="fu">sin</span>(<span class="dv">6</span> <span class="sc">*</span> pi <span class="sc">*</span> Displaced) <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> Displaced,</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>                     <span class="fu">sin</span>(pi <span class="sc">*</span> Displaced)))</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>}))</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>Regularized <span class="ot">&lt;-</span> <span class="fu">decomposeTSL</span>(Irregular, <span class="at">method =</span> <span class="st">&quot;decomposeEMD&quot;</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>                            <span class="at">control =</span> <span class="fu">list</span>(<span class="at">sifting =</span> <span class="fu">list</span>(<span class="at">stopRule =</span> <span class="st">&quot;doubleThreshold&quot;</span>)),</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>                            <span class="at">by =</span> <span class="fu">character</span>())</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; Warning: ID = AT: the time grid is not uniform; its 3000 samples were</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; interpolated by monoH.FC onto 3601 samples every 0.0025 s</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; Warning: ID = VT: the time grid is not uniform; its 3000 samples were</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; interpolated by monoH.FC onto 3601 samples every 0.0025 s</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>Regularized<span class="sc">$</span>signal[, .(<span class="at">samples =</span> .N, <span class="at">first =</span> <span class="fu">min</span>(t), <span class="at">last =</span> <span class="fu">max</span>(t)),</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>                   by <span class="ot">=</span> .(OCID, ID)]</span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt;      OCID     ID samples first  last</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt;    &lt;char&gt; &lt;char&gt;   &lt;int&gt; &lt;num&gt; &lt;num&gt;</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#&gt; 1:     H1     AT    3601     0     9</span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt; 2:     H1     VT    3601     0     9</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co">#&gt; 3:     H2     AT    3601     0     9</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co">#&gt; 4:     H2     VT    3601     0     9</span></span></code></pre></div>
+<p>The table <code>signal</code> holds the regularized series on the
+grid of 400 samples per second; the decomposition receives that
+series.</p>
+</div>
+<div id="measurement-selection-and-reconstruction" class="section level2">
+<h2>Measurement, selection and reconstruction</h2>
+<p><code>measureModesTSL()</code> receives the decomposition object,
+such as <code>OUT</code> from the scalar example, and returns
+<code>metrics</code> with one row per mode and
+<code>metricsSeries</code> with one row per series. The original
+decomposition is preserved. The tables keep the record, quantity and
+component keys.</p>
+<p>In <code>metrics</code>, <code>frequency</code> is a spectral power
+centroid and <code>bandwidth</code> describes the spread around it, both
+in Hz. <code>energy</code> has squared signal units times seconds,
+<code>energyFraction</code> is relative to the energy of the input
+series, and <code>meanPeriod</code> is estimated from the number of
+maxima. <code>metricsSeries</code> reports the mode count and the energy
+fractions of the remainder and <code>crossFraction</code>, the fraction
+left after subtracting modal and remainder energies from the input
+energy. Its interpretation as cross products requires reconstruction of
+that input. These measurements are distinct from the instantaneous
+frequency returned by <code>computeInstantaneousAttributes()</code>.</p>
+<p>Here energy is a quadratic signal measure. It is not automatically a
+physical energy, and its units differ between acceleration, velocity and
+displacement. A large energy fraction does not establish that a mode is
+free of contamination.</p>
+<p><code>selectModesTSL()</code> receives the decomposition, its
+<code>metrics</code> table and a declared <code>criterion</code>. The
+criterion combines a <code>rule</code> and its associated fields with
+<code>action = &quot;keep&quot;</code> or <code>&quot;remove&quot;</code>:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><code>rule</code></th>
+<th>Fields</th>
+<th>What meets the criterion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&quot;modes&quot;</code></td>
+<td><code>modes</code>, a table of mode indices and matching keys</td>
+<td>The listed modes of the matching groups or series</td>
+</tr>
+<tr class="even">
+<td><code>&quot;energyFraction&quot;</code></td>
+<td><code>minimum</code></td>
+<td>Modes whose energy fraction is at least the stated minimum</td>
+</tr>
+<tr class="odd">
+<td><code>&quot;band&quot;</code></td>
+<td><code>fMin</code>, <code>fMax</code> in Hz</td>
+<td>Modes whose <code>frequency</code> lies in the closed interval</td>
+</tr>
+</tbody>
+</table>
+<p>The band rule compares the centroid frequency alone; it does not
+require the entire bandwidth to lie in the interval. <code>&quot;keep&quot;</code>
+retains the modes that meet the criterion, and <code>&quot;remove&quot;</code>
+retains the others. The returned <code>modes</code> table contains the
+retained modes; <code>selection</code> records every mode with its keys,
+the declared criterion and <code>retained</code> flag.</p>
+<p>These rules express a selection supplied by the caller. A frequency
+band or energy threshold is not inferred to be a physical separation
+between motion and noise. The <a href="https://kanameishi.github.io/xemd/articles/validation.html">interpretation
+guide</a> describes the limits of energy, similarity and noise-based
+diagnostics.</p>
+<p><code>reconstructTSL()</code> receives the original decomposition and
+the <code>selection</code> table. It adds the retained modes of each
+series and, with <code>includeResidue = TRUE</code>, its
+<code>residue</code> or <code>fitResidual</code>.
+<code>includeResidue = FALSE</code> leaves that remainder out. Its
+<code>reconstruction</code> table keeps the keys, time grid and row
+order of the decomposed <code>signal</code>. The function help contains
+examples of complete reconstruction and of reconstruction after band
+selection.</p>
+<p>A series without retained modes contributes zero from its modes; its
+remainder still contributes when included. EWT has no remainder to add.
+For EEMD with <code>divisor = &quot;realizations&quot;</code>, retaining every
+mode and the remainder reconstructs the signal plus
+<code>meanNoise</code>, up to rounding.</p>
+<p>The residue choice is part of the reconstruction: a trend or another
+remaining contribution can be retained or excluded. When components are
+integrated, their terminal values and that of the residue can cancel in
+the complete sum; selecting only some components can break that
+cancellation. Neither that choice nor a successful numerical
+reconstruction establishes that the retained signal is
+uncontaminated.</p>
+</div>
+<div id="command-line-workflow" class="section level2">
+<h2>Command-line workflow</h2>
+<p>The command-line interface uses <code>xemd VERB CONFIG.json</code>;
+<code>xemd VERB --help</code> describes the configuration of that verb.
+<code>xemd methods</code> lists the decompositions accepted by the
+record interface, and <code>xemd operations</code> lists the exported
+functions and their arguments. A record input is a CSV or RDS long
+table; a series with exactly <code>t</code> and <code>s</code> is also
+accepted, with <code>ID</code> and <code>OCID</code> set to
+<code>&quot;series&quot;</code>.</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Verb</th>
+<th>Input and purpose</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>decompose</code></td>
+<td>A series or record table, one method and explicit controls</td>
+<td>RDS file with the decomposition tables</td>
+</tr>
+<tr class="even">
+<td><code>compare</code></td>
+<td>One input with a declared list of methods and controls</td>
+<td>Decompositions and metrics stacked by <code>method</code></td>
+</tr>
+<tr class="odd">
+<td><code>metrics</code></td>
+<td>A decomposition RDS file</td>
+<td>Input tables with <code>metrics</code> and
+<code>metricsSeries</code></td>
+</tr>
+<tr class="even">
+<td><code>select</code></td>
+<td>An RDS file containing metrics; a declared selection criterion</td>
+<td>Retained modes and the <code>selection</code> table</td>
+</tr>
+<tr class="odd">
+<td><code>reconstruct</code></td>
+<td>An RDS file and the <code>includeResidue</code> choice</td>
+<td>Input tables with <code>reconstruction</code></td>
+</tr>
+<tr class="even">
+<td><code>export</code></td>
+<td>An RDS file and an existing empty output directory</td>
+<td>One CSV file per table; <code>&quot;wide&quot;</code> format gives one column
+per mode</td>
+</tr>
+</tbody>
+</table>
+<p>After <code>compare</code>, measurement, selection and reconstruction
+operate on each method separately. <code>run</code> executes an ordered
+list of steps, passing each result to the next. <code>batch</code>
+applies the same steps to several inputs and adds the
+<code>source</code> key to the stacked tables. <code>calculate</code>
+calls a named exported operation with its native arguments from an RDS
+list.</p>
+<p>Configuration paths are relative to the configuration file, and
+existing outputs are not replaced. Decomposition methods that draw noise
+require an explicit <code>seed</code>, which is retained in the output;
+deterministic methods reject that field.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

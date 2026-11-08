@@ -1,0 +1,284 @@
+---
+title: "Seismic records"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Seismic records}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+Seismic records can be examined through acceleration (AT), velocity (VT)
+and displacement (DT). When VT and DT are obtained by integrating the same
+acceleration record, they describe related quantities, including the
+propagation of its contamination. Their modal decompositions need not
+contain corresponding oscillations at the same mode index.
+
+This guide explains how `xemd` groups supplied records, applies a selected
+decomposition and reconstructs a declared selection. The synthetic
+examples demonstrate that interface. The physical relationship between
+the quantities remains a separate part of interpreting the result.
+
+## Acceleration, velocity and displacement
+
+Integration changes the relative contribution of frequency components.
+It can also change the extrema on which EMD builds its envelopes. Consequently,
+integrating an acceleration mode is a different operation from
+decomposing the integrated velocity or displacement, and neither
+operation guarantees a mode-by-mode correspondence with the other.
+
+`decomposeTSL()` groups by record and quantity. With a scalar method it
+decomposes each component separately; with a coupled method it decomposes
+the channels of one quantity together. It does not couple AT, VT and DT
+through a kinematic constraint. The labels in the table identify the
+supplied quantities; the function does not infer, validate or convert
+their units.
+
+Selecting the same mode index from AT, VT and DT therefore does not by
+itself select the same physical contribution. Similarly, the validity of
+a noise threshold depends on the quantity and noise model: integration
+does not preserve a white-noise interpretation unchanged. These
+distinctions matter when interpreting a reconstruction as retained motion.
+
+## The long table
+
+Each row of the table holds a time `t` in seconds, a sample `s`, the
+quantity `ID` and the component `OCID`. `ID` takes values such as `"AT"`,
+`"VT"` and `"DT"`; `OCID` keeps the identifier of the provider. The other
+columns are metadata, and `by` names those that identify a record. A
+group is a record and an `ID`; its `OCID` are the channels of the group and
+share one time grid.
+
+The table below holds one record, `R1`, with five quantities and three
+components. Its series are three synthetic signals rotated across the
+quantities, so that every component of a quantity has its own series; they
+are not acceleration, velocity and displacement related by integration.
+
+The repeated labels make the grouping and returned tables visible. This
+example does not establish a physical filtering criterion for AT, VT or DT.
+
+```{r table, message = FALSE}
+library(xemd)
+library(data.table)
+
+Time <- seq(0, 9, length.out = 3000)
+Channels <- cbind(sin(pi * Time) + sin(2 * pi * Time) + sin(6 * pi * Time) +
+                      0.5 * Time,
+                  sin(pi * Time), sin(2 * pi * Time))
+IDs <- c("AT", "VT", "DT", "AI", "CAV")
+OCIDs <- c("H1", "H2", "UP")
+TSL <- rbindlist(lapply(seq_along(IDs), function(i) {
+    rbindlist(lapply(seq_along(OCIDs), function(j) {
+        data.table(RecordID = "R1", DIR = OCIDs[j], ID = IDs[i],
+                   OCID = OCIDs[j], t = Time,
+                   s = Channels[, (i + j - 2) %% 3 + 1])
+    }))
+}))
+TSL[, .N, by = .(RecordID, ID, OCID)]
+```
+
+## Methods
+
+`listDecompositions()` returns the methods that the operation accepts.
+
+```{r methods}
+listDecompositions()
+```
+
+`control` is a named list of the arguments of the method, common to every
+group. The operation derives `signal` and `samplingInterval` from each
+group; the ensembles receive `realizationCount` in place of `noise`, and
+NA-MEMD `noiseChannelCount` and `noiseRatio` in place of `noiseChannels`.
+Controls in the units of the signal are rejected, because the quantities do
+not share units.
+
+## A scalar method
+
+A scalar method decomposes each component separately with the same
+controls.
+
+```{r scalar}
+Input <- copy(TSL)
+OUT <- decomposeTSL(TSL, method = "decomposeEMD",
+                    control = list(sifting = list(stopRule = "doubleThreshold")),
+                    by = "RecordID")
+names(OUT)
+OUT$termination
+OUT$diagnostics[ID == "AT"]
+identical(Input, TSL)
+```
+
+Groups follow `by` and the quantities `AT`, `VT` and `DT` before the other
+quantities; components ascend. The order of the rows of the input does not
+intervene. Every table carries the `by` columns, the other metadata,
+`OCID` and `ID`. `signal` holds the decomposed series, `modes` the modes
+with their index `mode`, `residue` the residue, `diagnostics` the
+iterations and the convergence of each mode, and `termination` the
+`stopReason` of each series, or the rows of the native termination table of
+EEMD, CEEMD, MaskedEMD and BEMD. Each component keeps its own number of modes,
+without padding.
+
+The `signal` table is the input actually decomposed. The `modes` and
+`residue` tables give its additive representation; `diagnostics` and
+`termination` describe numerical extraction. A mode index identifies a
+position in that decomposition, not a shared physical source across
+independently processed series.
+
+```{r modes}
+OUT$modes[, .N, by = .(OCID, ID, mode)][order(OCID, ID, mode)][1:6]
+```
+
+## A coupled method
+
+A coupled method decomposes the components of a group together, so its
+modes stay aligned across components. The record below holds three tones of
+2, 24 and 288 Hz and two of them as separate components, sampled every
+millisecond; `decomposeMVMD()` shares its centers across the components,
+and they repeat for every `OCID`.
+
+The common center describes spectral alignment within this AT group.
+It does not require identical component amplitudes or instantaneous
+frequencies, and does not establish correspondence with a separate VT or
+DT decomposition.
+
+```{r coupled}
+TimeV <- seq_len(1000) / 1000
+SeriesV <- cbind(cos(2 * pi * 2 * TimeV) + 0.25 * cos(2 * pi * 24 * TimeV) +
+                     0.0625 * cos(2 * pi * 288 * TimeV),
+                 cos(2 * pi * 2 * TimeV), 0.25 * cos(2 * pi * 24 * TimeV))
+Record <- data.table(ID = "AT", OCID = rep(OCIDs, each = 1000),
+                     t = rep(TimeV, 3), s = as.vector(SeriesV))
+Control <- list(initialCenters = (0:2) / (6 / 1000),
+                alpha = 2000 * (1 / 1000)^2 / (8 * pi^2), tau = 0.5,
+                fixedZeroCenter = FALSE, tolerance = 1e-6,
+                maxIterations = 98)
+Coupled <- decomposeTSL(Record, method = "decomposeMVMD", control = Control,
+                        by = character())
+names(Coupled)
+Coupled$centers
+```
+
+## Grids that are not uniform
+
+The decompositions need a uniform grid. When the times of a group are not
+uniform, the operation constructs a regular grid, interpolates its
+components and emits one warning per group. The first time is retained;
+the [function reference](https://kanameishi.github.io/xemd/reference/decomposeTSL.html) specifies the
+grid rule and interpolation. The returned `signal` table contains the
+resampled input used for decomposition. Below, the central sample of two
+series is displaced by half a step.
+
+```{r regularization}
+Displaced <- Time
+Displaced[1501] <- Time[1501] + 9 / 2999 / 2
+Irregular <- rbindlist(lapply(c("AT", "VT"), function(id) {
+    data.table(ID = id, OCID = rep(c("H1", "H2"), each = 3000),
+               t = rep(Displaced, 2),
+               s = c(sin(pi * Displaced) + sin(2 * pi * Displaced) +
+                         sin(6 * pi * Displaced) + 0.5 * Displaced,
+                     sin(pi * Displaced)))
+}))
+Regularized <- decomposeTSL(Irregular, method = "decomposeEMD",
+                            control = list(sifting = list(stopRule = "doubleThreshold")),
+                            by = character())
+Regularized$signal[, .(samples = .N, first = min(t), last = max(t)),
+                   by = .(OCID, ID)]
+```
+
+The table `signal` holds the regularized series on the grid of 400 samples
+per second; the decomposition receives that series.
+
+## Measurement, selection and reconstruction
+
+`measureModesTSL()` receives the decomposition object, such as `OUT` from
+the scalar example, and returns `metrics` with one row per mode and
+`metricsSeries` with one row per series. The original decomposition is
+preserved. The tables keep the record, quantity and component keys.
+
+In `metrics`, `frequency` is a spectral power centroid and `bandwidth`
+describes the spread around it, both in Hz. `energy` has squared signal
+units times seconds, `energyFraction` is relative to the energy of the
+input series, and `meanPeriod` is estimated from the number of maxima.
+`metricsSeries` reports the mode count and the energy fractions of the
+remainder and `crossFraction`, the fraction left after subtracting modal
+and remainder energies from the input energy. Its interpretation as cross
+products requires reconstruction of that input. These measurements are distinct from the
+instantaneous frequency returned by `computeInstantaneousAttributes()`.
+
+Here energy is a quadratic signal measure. It is not automatically a
+physical energy, and its units differ between acceleration, velocity and
+displacement. A large energy fraction does not establish that a mode is
+free of contamination.
+
+`selectModesTSL()` receives the decomposition, its `metrics` table and a
+declared `criterion`. The criterion combines a `rule` and its associated
+fields with `action = "keep"` or `"remove"`:
+
+| `rule` | Fields | What meets the criterion |
+| --- | --- | --- |
+| `"modes"` | `modes`, a table of mode indices and matching keys | The listed modes of the matching groups or series |
+| `"energyFraction"` | `minimum` | Modes whose energy fraction is at least the stated minimum |
+| `"band"` | `fMin`, `fMax` in Hz | Modes whose `frequency` lies in the closed interval |
+
+The band rule compares the centroid frequency alone; it does not require
+the entire bandwidth to lie in the interval. `"keep"` retains the modes
+that meet the criterion, and `"remove"` retains the others. The returned
+`modes` table contains the retained modes; `selection` records every mode
+with its keys, the declared criterion and `retained` flag.
+
+These rules express a selection supplied by the caller. A frequency band
+or energy threshold is not inferred to be a physical separation between
+motion and noise. The [interpretation guide](https://kanameishi.github.io/xemd/articles/validation.html) describes
+the limits of energy, similarity and noise-based diagnostics.
+
+`reconstructTSL()` receives the original decomposition and the
+`selection` table. It adds the retained modes of each series and, with
+`includeResidue = TRUE`, its `residue` or `fitResidual`.
+`includeResidue = FALSE` leaves that remainder out. Its `reconstruction`
+table keeps the keys, time grid and row order of the decomposed `signal`.
+The function help contains examples of complete reconstruction and of
+reconstruction after band selection.
+
+A series without retained modes contributes zero from its modes; its
+remainder still contributes when included. EWT has no remainder to add.
+For EEMD with `divisor = "realizations"`, retaining every mode and the
+remainder reconstructs the signal plus `meanNoise`, up to rounding.
+
+The residue choice is part of the reconstruction: a trend or another
+remaining contribution can be retained or excluded. When components are
+integrated, their terminal values and that of the residue can cancel in
+the complete sum; selecting only some components can break that cancellation.
+Neither that choice nor a successful numerical
+reconstruction establishes that the retained signal is uncontaminated.
+
+## Command-line workflow
+
+The command-line interface uses `xemd VERB CONFIG.json`; `xemd VERB --help`
+describes the configuration of that verb. `xemd methods` lists the
+decompositions accepted by the record interface, and `xemd operations`
+lists the exported functions and their arguments. A record input is a
+CSV or RDS long table; a series with exactly `t` and `s` is also accepted,
+with `ID` and `OCID` set to `"series"`.
+
+| Verb | Input and purpose | Result |
+| --- | --- | --- |
+| `decompose` | A series or record table, one method and explicit controls | RDS file with the decomposition tables |
+| `compare` | One input with a declared list of methods and controls | Decompositions and metrics stacked by `method` |
+| `metrics` | A decomposition RDS file | Input tables with `metrics` and `metricsSeries` |
+| `select` | An RDS file containing metrics; a declared selection criterion | Retained modes and the `selection` table |
+| `reconstruct` | An RDS file and the `includeResidue` choice | Input tables with `reconstruction` |
+| `export` | An RDS file and an existing empty output directory | One CSV file per table; `"wide"` format gives one column per mode |
+
+After `compare`, measurement, selection and reconstruction operate on
+each method separately. `run` executes an ordered list of steps, passing
+each result to the next. `batch` applies the same steps to several inputs
+and adds the `source` key to the stacked tables. `calculate` calls a
+named exported operation with its native arguments from an RDS list.
+
+Configuration paths are relative to the configuration file, and existing
+outputs are not replaced. Decomposition methods that draw noise require
+an explicit `seed`, which is retained in the output; deterministic
+methods reject that field.

@@ -1,0 +1,246 @@
+xemd: third-party code, authors and licenses
+
+xemd is distributed under the GNU General Public License, version 3
+(License: GPL-3 in DESCRIPTION). Parts of its R code are adapted from the
+software listed below, in alphabetical order. Each entry names the source
+and its revision, the authors and the copyright notice that the source
+states, its license, the files of xemd that contain the adapted code
+(paths of the source package) and the dates on which xemd modified them.
+The texts of the Apache License 2.0, the GNU General Public License
+version 3, the GNU Library General Public License version 2 and the MIT
+license are the standard licenses that R ships in the directory
+share/licenses of its installation (R.home("share")); the package does not
+install copies of them. Every MIT copyright notice is reproduced in full
+below.
+
+
+
+emd.m, distributed with CEEMDAN
+-------------------------------
+
+Adapted from emd.m by G. Rilling (last modification March 2007), as
+distributed with CEEMDAN, revision af9a0f83, in R/extendExtrema.R
+(modified for xemd on 2026-10-09) and R/interpolateSpline.R (modified for
+xemd on 2026-10-06 and 2026-10-09).
+
+MIT License
+
+Copyright (c) 2020 Marcelo A. Colominas
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+emdr 1.2.3
+----------
+
+Adapted from emdr 1.2.3 (R), revision
+a802208b98e506071bb4f3c7eea4d2e5ad0a16f7, R/memd.R, function
+get.projections, by Pierre Masselot: the angles that turn each Hammersley
+point into a unit direction, in R/buildDirections.R. Modified for xemd on
+2026-10-11.
+License: GPL-3, as declared in the DESCRIPTION of emdr 1.2.3.
+
+
+ewtpy
+-----
+
+Adapted from ewtpy (Python), revision
+f9ff38bc5cd7859eea58c5b29099f8a503792b63, by Vinícius Rezende Carvalho,
+in R/buildFilterBank.R, R/segmentSpectrum.R and R/transformEWT.R. The
+ewtpy functions name Jerome Gilles as author of the MATLAB code they
+translate, together with Kathryn Heal for the detection of boundaries and
+local maxima. Modified for xemd on 2026-10-11.
+
+Copyright (c) 2019 Vinícius Carvalho & Eduardo Mazoni
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+fifpy
+-----
+
+Adapted from fifpy (Python), revision
+26e51e7d45e551950dea8be37ece447fc4340296, in R/iterateFluctuationPeriodic.R,
+R/iterateFluctuationZero.R, R/resampleFilter.R and R/selectHalfWidth.R.
+The fifpy sources name Emanuele Papini as author of the Python version and
+Antonio Cicone as author of the original MATLAB version. Modified for xemd
+on 2026-10-11.
+
+MIT License
+
+Copyright (c) 2022 Emanuele Papini
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+gmsp 0.8.0
+----------
+
+Adapted from gmsp 0.8.0, commit 28e2ca2bf177358c039cf9384620216b0034dacb, by
+Alejandro Verri Kozlowski: the regularization of the time grid
+(lib/R/regularize.R) and the rationalization of the sampling interval
+(lib/R/utils.R), in R/regularizeSeries.R and R/rationalizeStep.R.
+Modified for xemd on 2026-10-11.
+
+MIT License
+
+Copyright (c) 2026 Alejandro Verri Kozlowski
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+
+LMD 1.2.1
+---------
+
+Adapted from LMD 1.2.1 (R), revision
+ec11b721ec7b05f0137eeb67a619b28f62ef85a2, by Shubhra Prakash, in
+R/buildLocalLevels.R and R/extractProduct.R. Modified for xemd on
+2026-10-11.
+License: Apache License (>= 2), as declared in the DESCRIPTION of LMD
+1.2.1. The LMD sources carry no copyright notice and no NOTICE file. The
+same DESCRIPTION states that LMD is based on the approach suggested by
+Smith (2005) and on the Python library PyLMD.
+
+
+pyewt
+-----
+
+Adapted from pyewt (Python), revision
+9d60a340f34e92356ed4f7a6a8b7044f524455e3, by Jerome Gilles, in
+R/synthesizeBands.R. Modified for xemd on 2026-10-11.
+
+MIT License
+
+Copyright (c) 2024 Jerome Gilles
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+pytvfemd 0.3.14
+---------------
+
+Adapted from pytvfemd 0.3.14 (Python), by Stefano Bianchi and Alessandro
+Longo, in R/approximateSpline.R, R/decomposeTVFEMD.R, R/estimateCutoff.R,
+R/extractTVFMode.R, R/measureBandwidth.R, R/placeKnots.R and
+R/realignCutoff.R. Modified for xemd on 2026-10-11.
+License: GPL-3, as declared in the METADATA of pytvfemd 0.3.14
+("License: GPLv3.0"); its LICENSE file is the text of the GNU General Public
+License version 3 in share/licenses of the R installation.
+
+Copyright (C) 2022-  Stefano Bianchi, Alessandro Longo
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+SynchWave 1.1.2
+---------------
+
+Adapted from SynchWave 1.1.2 (R and Fortran), revision
+9ac80b2c3e60b417d0ee5567a66e8e64faa1a979, in R/evaluateMorlet.R,
+R/reassignCWT.R and R/transformCWT.R (modified for xemd on 2026-10-06 and
+2026-10-11), R/invertSST.R (modified for xemd on 2026-10-11) and
+R/traceSSTRidge.R and R/extractSSTModes.R (modified for xemd on
+2026-10-14). The SynchWave DESCRIPTION names the authors as "Matlab
+original by Eugene Brevdo; R port by Dongik Jang, Hee-Seok Oh and Donghoh
+Kim"; its Fortran source names Eugene Brevdo and Hau-Tieng Wu as original
+authors of the Synchrosqueezing Toolbox, and Jianfeng Lu as original author
+and Eugene Brevdo as maintainer of curve_ext. R/traceSSTRidge.R adapts
+curve_ext, and R/extractSSTModes.R adapts curve_ext_multi, which calls
+curve_ext once per curve.
+License: LGPL (>= 2), as declared in the DESCRIPTION of SynchWave 1.1.2:
+the GNU Library General Public License version 2 or any later version.
+xemd distributes these six files under the GNU General Public License
+version 3, as section 3 of the GNU Library General Public License version 2
+permits.

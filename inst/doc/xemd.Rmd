@@ -1,0 +1,248 @@
+---
+title: "Introduction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+An observed signal can contain oscillations at different time scales,
+with amplitudes and frequencies that vary during the record. Empirical
+mode decomposition (EMD) uses the signal's local extrema to construct
+components, rather than prescribing sinusoidal components of constant
+frequency. `xemd` provides EMD, its extensions and related decomposition
+methods, followed by operations for examining and reconstructing their
+outputs.
+
+This guide follows two examples: successive extraction by EMD
+and joint fitting by variational mode decomposition (VMD). They illustrate
+different meanings of a mode, the controls used to obtain it and the
+diagnostics returned by the calculation. The
+[methods guide](https://kanameishi.github.io/xemd/articles/methods.html) covers the other families, and
+[validation and interpretation](https://kanameishi.github.io/xemd/articles/validation.html) explains the evidence
+needed to select components.
+
+## Modes and intrinsic mode functions
+
+A mode is a component of a decomposition. In EMD, the target component is
+an intrinsic mode function (IMF): its numbers of extrema and zero crossings
+differ by at most one, and the mean of its upper and lower envelopes is
+zero at each point. These conditions describe oscillation geometry; they allow
+amplitude and frequency to vary and do not require a sinusoid of constant
+frequency. The envelope mean is different from the average of all samples.
+
+Sifting repeatedly subtracts the envelope mean to approach those
+conditions. A numerical stopping rule specifies how that process ends;
+an iteration limit or a prescribed number of subtractions is not proof
+that the ideal IMF conditions hold. The returned diagnostics distinguish
+those outcomes.
+
+The residual signal is what remains after extraction. It can contain a
+trend or a constant, and remains part of the additive reconstruction.
+Neither exact reconstruction nor approximate IMF conditions establish
+that a mode is a separate physical source. Different representations can
+reconstruct the same signal, and one physical oscillation can be spread
+over several extracted components.
+
+## Data model
+
+`decomposeEMD()` and `decomposeVMD()` receive a finite numeric vector
+`signal`, in the units of the measured quantity. EMD operates on sample
+positions. VMD also receives `samplingInterval` in seconds and center
+frequencies in Hz. The [seismic records guide](https://kanameishi.github.io/xemd/articles/seismic.html) describes the
+long-table interface for records, quantities and components.
+
+The returned list depends on the method. For the EMD and VMD examples, the
+fields have the following meanings:
+
+| Field | EMD | VMD |
+| --- | --- | --- |
+| `modes` | Matrix of samples by extracted modes | Matrix of samples by the prescribed modes |
+| Remainder | `residue`, left after successive extractions | `fitResidual`, the input minus the sum of the fitted modes |
+| `iterations` | Number of sifting subtractions for each mode | Number of joint sweeps, repeated for each mode |
+| `converged` | Acceptance of each mode by its sifting rule | Result of the joint stopping test, repeated for each mode |
+| `stopReason` | Reason extraction ended | Reason the joint iteration ended |
+| `centers` | Absent | Final center frequencies in Hz |
+
+## Empirical mode decomposition
+
+EMD extracts a mode from the current residue and subtracts it before the
+next extraction. Within an extraction, sifting subtracts the mean of the
+upper and lower envelopes until the selected rule accepts the mode or the
+iteration ends. The example signal contains three sines and a trend,
+sampled at 3000 points. Its controls select the double-threshold rule,
+reflected boundaries and up to 2000 sifting subtractions per mode;
+`maxModes = Inf` lets the residue determine when extraction ends.
+
+```{r emd}
+library(xemd)
+
+Time <- seq(0, 9, length.out = 3000)
+Signal <- sin(pi * Time) + sin(2 * pi * Time) + sin(6 * pi * Time) +
+    0.5 * Time
+Sifting <- list(stopRule = "doubleThreshold", thresholds = c(0.05, 0.5),
+                fraction = 0.05, maxSift = 2000, boundary = "reflection",
+                maxModes = Inf)
+EMD <- decomposeEMD(Signal, sifting = Sifting)
+str(EMD)
+```
+
+`EMD$converged` describes the individual extractions: `TRUE` means that
+the stopping rule accepted the mode; `FALSE` means that `maxSift` was
+reached or that the envelopes could not be built. The fixed-sifting rule,
+available through `decomposeEMD()`, instead reports `NA` because it
+performs a prescribed number of subtractions.
+
+`EMD$stopReason` describes the outer extraction process.
+`"terminalResidue"` means that the remaining signal has at most one
+extremum; `"modeLimit"` means that the requested extraction limit was
+reached; `"insufficientExtrema"` means that the boundary rule could not
+build the next envelopes. These reasons are separate from the acceptance
+of each extracted mode.
+
+The controls affect the decomposition itself. Envelope construction near
+the record boundaries affects the extracted components, and additional
+sifting can alter their amplitude modulation. The example's controls are
+not a universal setting for another signal.
+
+The sum of the modes and the residue reconstructs the signal up to
+rounding. The following expression reports the largest absolute
+reconstruction difference in the units of the input signal.
+
+```{r reconstruction}
+max(abs(rowSums(EMD$modes) + EMD$residue - Signal))
+```
+
+This difference checks the additive identity. It does not measure whether
+each extracted component matches a generating oscillation of the signal.
+
+`assessIMF()` provides numerical diagnostics of the IMF conditions for each column.
+The `count` result tests whether the numbers of extrema and zero crossings
+differ by at most one. The `deviation` result tests the envelope mean
+relative to the envelope amplitude with the double threshold, an
+approximation to the ideal zero envelope mean; it is `NA`
+when the boundary rule cannot construct the envelopes. The example also
+passes the residue as the final column, so its diagnosis remains distinct
+from those of the extracted modes.
+
+```{r assess}
+assessIMF(cbind(EMD$modes, EMD$residue))
+```
+
+## Variational mode decomposition
+
+VMD fits a prescribed number of modes concentrated around center
+frequencies. It updates the mode spectra, their centers and a multiplier
+together. The length of `initialCenters` sets the number of modes;
+`fixedZeroCenter = FALSE` allows every center to change. VMD modes are not
+defined by imposing the geometric IMF conditions of EMD. Their defining
+property in this formulation is the bandwidth objective. An IMF diagnostic
+can still be computed for them, but it tests a property additional to that
+objective.
+
+The signal contains tones of 2, 24 and 288 Hz sampled every millisecond.
+`initialCenters` is in Hz and `alpha`, the bandwidth penalty, is in
+$\mathrm{s}^2$. The expression for `alpha` converts the value 2000 from
+the cycles-per-sample convention used by sktime and VMDecomp into the
+units used by xemd. A positive `tau` selects the constrained problem;
+`tau = 0` selects the penalized problem with a zero multiplier.
+
+```{r vmd}
+SamplingInterval <- 1 / 1000
+TimeV <- seq_len(1000) * SamplingInterval
+SignalV <- cos(2 * pi * 2 * TimeV) + 0.25 * cos(2 * pi * 24 * TimeV) +
+    0.0625 * cos(2 * pi * 288 * TimeV)
+VMD <- decomposeVMD(SignalV, samplingInterval = SamplingInterval,
+                    initialCenters = (0:2) / (6 * SamplingInterval),
+                    alpha = 2000 * SamplingInterval^2 / (8 * pi^2),
+                    tau = 0.5, fixedZeroCenter = FALSE, tolerance = 1e-6,
+                    maxIterations = 98)
+VMD$centers
+VMD$stopReason
+```
+
+`VMD$centers` contains the final center frequencies. A `stopReason` of
+`"tolerance"` means that the relative change of the mode spectra passed
+the stopping test; `"iterationLimit"` means that the last permitted sweep
+was reached. In either case the returned modes come from the last sweep.
+`VMD$fitResidual` contains the difference between the signal and their
+sum; with `tau = 0`, the formulation permits a nonzero fit residual.
+
+The prescribed mode count and bandwidth penalty affect how oscillations
+are distributed among the modes. Passing the stopping test indicates
+small changes between iterations; it does not certify a global optimum
+or a physically unique decomposition. The returned center frequency
+summarizes a mode's spectral concentration and is not its instantaneous
+frequency at every sample.
+
+## Instantaneous attributes and Hilbert spectrum
+
+The Hilbert transform associates each real component with an analytic
+signal. Its magnitude gives amplitude and its angle gives phase.
+The time derivative of phase in radians, divided by $2\pi$, gives
+instantaneous frequency in Hz when time is in seconds. Applying this
+operation to a sum of oscillations produces the phase of that sum, not
+the individual frequencies of its summands; decomposition therefore
+precedes this part of Hilbert-Huang analysis.
+
+`computeInstantaneousAttributes()` returns matrices of amplitude, phase
+and frequency, with samples in rows and modes in columns. Amplitude has
+the units of the input modes, phase is in radians and frequency is in Hz.
+The EMD example uses a time step of 9 / 2999 seconds; the expression below
+reports the median frequency of each mode.
+
+```{r attributes}
+Attributes <- computeInstantaneousAttributes(EMD$modes,
+                                             samplingInterval = 9 / 2999)
+apply(Attributes$frequency, 2, stats::median)
+```
+
+The analytic signal is computed by a discrete Fourier transform, which
+implies periodic extension of the record. Phase is continuous within runs
+of nonzero analytic amplitude; a zero leaves the phase undefined and
+starts a new run. Frequency uses neighboring phase values and is `NA`
+where the required phase values are undefined.
+
+Small analytic amplitude can make the phase derivative sensitive to the
+signal, and the periodic extension can affect the record boundaries.
+The resulting frequency is a property of the analyzed component; its
+physical interpretation also depends on how that component was separated.
+
+`buildHilbertSpectrum()` places each instantaneous amplitude into the
+cell containing its frequency, sample by sample. With `exponent = 2`, it
+accumulates squared amplitudes. The edges in this example define the
+intervals $[1,2)$, $[2,3)$, $[3,4)$ and $[4,5)$ in Hz.
+Frequencies outside these intervals or equal to `NA` contribute nothing.
+
+```{r spectrum}
+Spectrum <- buildHilbertSpectrum(Attributes$frequency, Attributes$amplitude,
+                                 edges = c(1, 2, 3, 4, 5), exponent = 2,
+                                 samplingInterval = 9 / 2999)
+Spectrum$marginal
+```
+
+`Spectrum$spectrum` holds samples by frequency cells, in squared signal
+units for this example. `Spectrum$marginal` sums each cell over time and
+multiplies by the sampling interval, giving squared signal units times
+seconds. The values are cell masses; no division by frequency-cell width
+is applied.
+
+The marginal spectrum accumulates contributions over time and therefore
+does not retain when an oscillation occurred. It is constructed from
+instantaneous amplitude and frequency and is not a Fourier spectrum.
+
+## Further reading
+
+The [methods guide](https://kanameishi.github.io/xemd/articles/methods.html) describes method concepts, controls and
+termination. The help pages for `decomposeEMD()`, `decomposeVMD()`,
+`assessIMF()`, `computeInstantaneousAttributes()` and
+`buildHilbertSpectrum()` specify their arguments, returned values and
+references. `listOperations()` lists the exported functions and their
+formal argument names.
+
+The [bibliography](https://kanameishi.github.io/xemd/articles/references.html) lists the published work on the methods.
