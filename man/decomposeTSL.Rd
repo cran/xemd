@@ -110,6 +110,13 @@ difference of the times and returns the grid from zero, whereas here the
 step starts from the mean and the grid keeps the origin \eqn{t_1}. See the
 NOTICE file of the installed package.
 }
+\section{Conditions}{
+A group whose channels do not share one time grid, or whose series has
+fewer than two samples, stops the function with an error of class
+\code{xemdTimeGrid}. The warning about a non-uniform time grid is of class
+\code{xemdWarning}. Both conditions name the group in their \code{unit}
+field.
+}
 \seealso{
 \code{\link{listDecompositions}}, \code{\link{decomposeEMD}},
 \code{\link{decomposeMVMD}}

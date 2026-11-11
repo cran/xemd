@@ -90,16 +90,20 @@ decomposeTSL <- function(TSL, method, control, by) {
                        sep = " = ", collapse = ", ")
         Times <- split(Group[["t"]], factor(Group[["OCID"]], levels = unique(Group[["OCID"]])))
         if (!all(vapply(Times, identical, logical(1L), Times[[1L]]))) {
-            stop(Label, ": the OCID do not share one time grid")
+            stop(errorCondition("the OCID do not share one time grid", unit = Label,
+                                class = c("xemdTimeGrid", "moduleFailure"), call = NULL))
         }
-        if (length(Times[[1L]]) < 2L) stop(Label, ": a series needs two samples or more")
+        if (length(Times[[1L]]) < 2L) {
+            stop(errorCondition("a series needs two samples or more", unit = Label,
+                                class = c("xemdTimeGrid", "moduleFailure"), call = NULL))
+        }
         Grid <- .regularizeSeries(time = as.double(Times[[1L]]),
                                   series = matrix(as.double(Group[["s"]]), ncol = length(Times)))
         if (Grid$regularized) {
-            warning(warningCondition(paste0(Label, ": the time grid is not uniform; its ", length(Times[[1L]]),
+            warning(warningCondition(paste0("the time grid is not uniform; its ", length(Times[[1L]]),
                                             " samples were interpolated by monoH.FC onto ", length(Grid$time),
                                             " samples every ", Grid$samplingInterval, " s"),
-                                     class = c("xemdWarning", "moduleWarning"), call = NULL))
+                                     unit = Label, class = c("xemdWarning", "moduleWarning"), call = NULL))
         }
         c(Grid, list(keys = unique(Group, by = "OCID")[, c(by, META, "OCID", "ID"), with = FALSE]))
     })

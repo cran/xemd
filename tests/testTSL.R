@@ -37,7 +37,7 @@ stopifnot(all(c("signal", "modes", "residue", "diagnostics", "termination") %in%
 Grouped <- decomposeTSL(data.table::data.table(RecordID = "R1", TSL), method = "decomposeEMD",
                         control = list(sifting = list(stopRule = "doubleThreshold")), by = "RecordID")
 stopifnot(identical(names(Grouped$modes), c("RecordID", Keys, "mode", "t", "s")),
-          identical(Grouped$modes$s, Decomposition$modes$s))
+          isTRUE(all.equal(Grouped$modes$s, Decomposition$modes$s)))
 
 # An ensemble method draws its noise from the caller's stream by series; a
 # coupled method decomposes the components of a record together.

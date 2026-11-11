@@ -85,7 +85,7 @@ in the order of \code{modes}.}
 \section{Conditions}{
 A series of \code{signal} with zero energy leaves its energy fractions
 undefined and stops the function with an error of class
-\code{xemdZeroEnergy}.
+\code{xemdZeroEnergy} whose \code{unit} field names the series.
 }
 \seealso{
 \code{\link{decomposeTSL}}, \code{\link{selectModesTSL}},

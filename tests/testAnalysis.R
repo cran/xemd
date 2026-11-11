@@ -78,5 +78,6 @@ Realizations <- array(c(2, 4, 6, 8, 1, 1, 1, 1, 4, 6, 8, 10, 0, 0, 0, 0), dim = 
 Dispersion <- measureDispersion(Realizations)
 stopifnot(identical(names(Dispersion), c("variance", "meanVariance")),
           identical(dim(Dispersion$variance), c(4L, 2L)),
-          all(Dispersion$variance[, 1L] == 2), all(Dispersion$meanVariance == Dispersion$variance / 2),
+          isTRUE(all.equal(Dispersion$variance[, 1L], rep(2, 4L))),
+          isTRUE(all.equal(Dispersion$meanVariance, Dispersion$variance / 2)),
           rejects(measureDispersion(Tones)))

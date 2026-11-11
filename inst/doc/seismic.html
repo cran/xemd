@@ -577,10 +577,10 @@ half a step.</p>
 <span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>Regularized <span class="ot">&lt;-</span> <span class="fu">decomposeTSL</span>(Irregular, <span class="at">method =</span> <span class="st">&quot;decomposeEMD&quot;</span>,</span>
 <span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>                            <span class="at">control =</span> <span class="fu">list</span>(<span class="at">sifting =</span> <span class="fu">list</span>(<span class="at">stopRule =</span> <span class="st">&quot;doubleThreshold&quot;</span>)),</span>
 <span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>                            <span class="at">by =</span> <span class="fu">character</span>())</span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; Warning: ID = AT: the time grid is not uniform; its 3000 samples were</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; interpolated by monoH.FC onto 3601 samples every 0.0025 s</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; Warning: ID = VT: the time grid is not uniform; its 3000 samples were</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; interpolated by monoH.FC onto 3601 samples every 0.0025 s</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; Warning: the time grid is not uniform; its 3000 samples were interpolated by</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; monoH.FC onto 3601 samples every 0.0025 s</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; Warning: the time grid is not uniform; its 3000 samples were interpolated by</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; monoH.FC onto 3601 samples every 0.0025 s</span></span>
 <span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>Regularized<span class="sc">$</span>signal[, .(<span class="at">samples =</span> .N, <span class="at">first =</span> <span class="fu">min</span>(t), <span class="at">last =</span> <span class="fu">max</span>(t)),</span>
 <span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>                   by <span class="ot">=</span> .(OCID, ID)]</span>
 <span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt;      OCID     ID samples first  last</span></span>

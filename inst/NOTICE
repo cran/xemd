@@ -1,7 +1,8 @@
 xemd: third-party code, authors and licenses
 
-xemd is distributed under the GNU General Public License, version 3
-(License: GPL-3 in DESCRIPTION). Parts of its R code are adapted from the
+xemd is distributed under the GNU Affero General Public License, version 3
+or later (License: AGPL (>= 3) in DESCRIPTION). Parts of its R code are
+adapted from the
 software listed below, in alphabetical order. Each entry names the source
 and its revision, the authors and the copyright notice that the source
 states, its license, the files of xemd that contain the adapted code

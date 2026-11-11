@@ -149,7 +149,7 @@ The signal contains tones of 2, 24 and 288 Hz sampled every millisecond.
 `initialCenters` is in Hz and `alpha`, the bandwidth penalty, is in
 $\mathrm{s}^2$. The expression for `alpha` converts the value 2000 from
 the cycles-per-sample convention used by sktime and VMDecomp into the
-units used by xemd. A positive `tau` selects the constrained problem;
+units used by `xemd`. A positive `tau` selects the constrained problem;
 `tau = 0` selects the penalized problem with a zero multiplier.
 
 ```{r vmd}

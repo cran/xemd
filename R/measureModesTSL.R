@@ -37,7 +37,7 @@ measureModesTSL <- function(decomposition) {
     Energy <- sumSquares(decomposition$signal)
     if (any(Energy == 0)) {
         Label <- paste(Keys, vapply(Series[which.max(Energy == 0)], as.character, ""), sep = " = ", collapse = ", ")
-        stop(errorCondition(paste0(Label, ": the series has zero energy, so its energy fractions are undefined"),
+        stop(errorCondition("the series has zero energy, so its energy fractions are undefined", unit = Label,
                             class = c("xemdZeroEnergy", "moduleFailure")))
     }
     Modes <- unique(decomposition$modes[, c(Keys, "mode"), with = FALSE])

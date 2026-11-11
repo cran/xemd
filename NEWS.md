@@ -1,3 +1,28 @@
+## xemd 0.1.6
+
+- Licence changed from GPL-3 to AGPL (>= 3). The new `LICENSE.note` states
+  the copyright holder's reservation of text and data mining, which is not a
+  licence term; the code adapted from third parties keeps the licences listed
+  in `NOTICE`.
+- The conditions that name a series carry it in their `unit` field instead of
+  a prefix of the message: the error of `decomposeTSL()` when the channels of
+  a group do not share one time grid or a series has fewer than two samples,
+  now of class `xemdTimeGrid`, its warning about a non-uniform time grid, and
+  the `xemdZeroEnergy` error of `measureModesTSL()`.
+- In the command-line interface, an error inside a step of `run` or `batch`,
+  a method of `compare` or the reading of an input keeps its class and exit
+  status and locates itself in the fields `phase`, `unit` and `path`, which
+  `--verbose` shows.
+- `xemd doctor` diagnoses without repairing, as the family rules: one JSON
+  report on standard output, exit 0 only when every required check passes,
+  and `doctor --help` listing the checks. The `--json` and `--install` flags
+  are gone; `xemd repair [--source DIR]` installs the unavailable R packages
+  or reinstalls the library from a checkout. `xemd --version` prints the
+  package with its version and then the installed build commit.
+- The maintainer scripts of `inst/` (`build.R`, `package.R`, `install.R`,
+  `rhub.R`, `cran-check.R`, `cran-submit.R`, `rhub-check.R`) no longer ship
+  in the package tarball; they stay in the repository for the maintainer.
+
 ## xemd 0.1.5
 
 - The conditions the library signals carry the classes of the family console:

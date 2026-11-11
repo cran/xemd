@@ -6,6 +6,9 @@ Fixtures <- readRDS("fixtures/extractionFailures.rds")
 isClose <- function(value, reference) {
     all(abs(value - reference) <= Fixtures$tolerance * (1 + max(abs(reference))))
 }
+# With no mode extracted the residue is the input itself, copied, and the
+# phase is the one given: exact comparisons by rule, not results in double
+# precision, which compare with tolerance (all.equal).
 for (Case in Fixtures$scalar) {
     OUT <- xemd:::.decomposeScalar(Case$signal, sifting = Case$sifting, acceptIncomplete = FALSE)
     stopifnot(ncol(OUT$modes) == 0L, identical(OUT$residue, Case$signal),
@@ -14,7 +17,7 @@ for (Case in Fixtures$scalar) {
               OUT$termination$stopReason == "insufficientExtrema")
     # The unchanged EMD entry still exposes its former incomplete candidate.
     Legacy <- decomposeEMD(Case$signal, sifting = Case$sifting)
-    stopifnot(isFALSE(Legacy$converged[1L]), identical(Legacy$modes[, 1L], Case$mode),
+    stopifnot(isFALSE(Legacy$converged[1L]), isTRUE(all.equal(Legacy$modes[, 1L], Case$mode)),
               isClose(rowSums(Legacy$modes) + Legacy$residue, Case$signal))
 }
 Case <- Fixtures$initial
@@ -52,7 +55,7 @@ Limit <- list(stopRule = "SD", tolerance = 1e-12, maxSift = 1, boundary = "refle
 Strict <- xemd:::.decomposeScalar(Signal, sifting = xemd:::.checkSifting(Limit), acceptIncomplete = FALSE)
 Legacy <- xemd:::.decomposeScalar(Signal, sifting = xemd:::.checkSifting(Limit), acceptIncomplete = TRUE)
 stopifnot(ncol(Strict$modes) >= 1L, all(Strict$converged %in% FALSE), all(Strict$iterations == 1L),
-          Strict$termination$stopReason != "iterationLimit", identical(Strict$modes, Legacy$modes))
+          Strict$termination$stopReason != "iterationLimit", isTRUE(all.equal(Strict$modes, Legacy$modes)))
 set.seed(628)
 Noise <- matrix(rnorm(500 * 3), 500, 3)
 OUT <- decomposeEEMD(Signal, noise = Noise, amplitudeRatio = 0.2, divisor = "realizations", sifting = Limit)

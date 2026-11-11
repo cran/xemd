@@ -1,9 +1,9 @@
 Package: xemd
 Type: Package
 Title: eXtended Empirical Mode Decomposition
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: c(
-    person("Alejandro", "Verri Kozlowski", email = "averri@fi.uba.ar",
+    person("Alejandro Daniel", "Verri", email = "averri@fi.uba.ar",
         role = c("aut", "cre", "cph", "trl"),
         comment = c(ORCID = "0000-0002-8535-1170")),
     person("G.", "Rilling", role = "ctb", comment = "emd.m code"),
@@ -54,7 +54,7 @@ Description: Signals are decomposed into oscillatory modes by empirical mode
     record and quantity in one call, with a warning and a regularization of
     the time grid when it is not uniform.
 URL: https://kanameishi.github.io/xemd/
-License: GPL-3
+License: AGPL (>= 3)
 Copyright: Authors, copyright notices and licenses of the third-party
         code adapted in xemd are listed in file inst/NOTICE.
 Encoding: UTF-8
@@ -63,8 +63,8 @@ Imports: data.table, pracma, splines, stats, utils
 Suggests: hht, knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2026-10-24 20:27:01 UTC; averrik
-Author: Alejandro Verri Kozlowski [aut, cre, cph, trl] (ORCID:
+Packaged: 2026-11-10 20:04:03 UTC; averrik
+Author: Alejandro Daniel Verri [aut, cre, cph, trl] (ORCID:
     <https://orcid.org/0000-0002-8535-1170>),
   G. Rilling [ctb] (emd.m code),
   Marcelo A. Colominas [cph] (CEEMDAN distribution of emd.m),
@@ -87,6 +87,6 @@ Author: Alejandro Verri Kozlowski [aut, cre, cph, trl] (ORCID:
   Dongik Jang [ctb] (SynchWave code),
   Hee-Seok Oh [ctb] (SynchWave code),
   Donghoh Kim [ctb] (SynchWave code)
-Maintainer: Alejandro Verri Kozlowski <averri@fi.uba.ar>
+Maintainer: Alejandro Daniel Verri <averri@fi.uba.ar>
 Repository: CRAN
-Date/Publication: 2026-11-08 17:10:02 UTC
+Date/Publication: 2026-11-11 09:00:02 UTC
