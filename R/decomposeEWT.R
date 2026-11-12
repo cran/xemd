@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Empirical wavelet transform (ewt.sst.model.es.qmd:7-123) of a signal sampled
 # every samplingInterval seconds into at most bandCount bands: boundaries at
 # the midpoints between the dominant maxima of its Fourier magnitude, fewer

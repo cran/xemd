@@ -1,7 +1,7 @@
 Package: xemd
 Type: Package
 Title: eXtended Empirical Mode Decomposition
-Version: 0.1.6
+Version: 0.1.7
 Authors@R: c(
     person("Alejandro Daniel", "Verri", email = "averri@fi.uba.ar",
         role = c("aut", "cre", "cph", "trl"),
@@ -63,7 +63,7 @@ Imports: data.table, pracma, splines, stats, utils
 Suggests: hht, knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2026-11-10 20:04:03 UTC; averrik
+Packaged: 2026-11-11 21:28:39 UTC; averrik
 Author: Alejandro Daniel Verri [aut, cre, cph, trl] (ORCID:
     <https://orcid.org/0000-0002-8535-1170>),
   G. Rilling [ctb] (emd.m code),
@@ -89,4 +89,4 @@ Author: Alejandro Daniel Verri [aut, cre, cph, trl] (ORCID:
   Donghoh Kim [ctb] (SynchWave code)
 Maintainer: Alejandro Daniel Verri <averri@fi.uba.ar>
 Repository: CRAN
-Date/Publication: 2026-11-11 09:00:02 UTC
+Date/Publication: 2026-11-12 15:30:02 UTC

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Masked empirical mode decomposition (mascaras.model:9-180) under one of
 # three mask rules, each a named control of the method. "pair", the opposite
 # sine masks of 2005: one extraction c_1 = (E_1(x + w) + E_1(x - w)) / 2 with

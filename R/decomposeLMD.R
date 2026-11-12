@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Local mean decomposition (lmd.model:51-93) by successive extraction of
 # product functions: r_0 is the signal; before extraction p the decomposition
 # ends with "terminalResidue" when r_{p-1} has at most one extremum, a residue

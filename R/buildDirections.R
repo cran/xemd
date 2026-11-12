@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Directions of the vector sifting (memd.model:110-136): the Hammersley points
 # i = 1, ..., D with the radical inverses rho_b(i) = sum_l a_l b^(-l-1) of the
 # digits of i (memd.model:122-132) in the bases of the first C - 1 primes, in

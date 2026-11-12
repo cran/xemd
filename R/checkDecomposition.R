@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Input of the analysis record operations: decomposition, the list of
 # data.tables of decomposeTSL with signal, modes and at most one remainder,
 # residue or fitResidual (EWT returns neither). The keys are the columns of

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Noise-assisted MEMD (memd.model:166-186): one MEMD of the signal augmented
 # with the Q supplied noise channels, in the units of the signal, keeping the
 # C coordinates of the signal, c_k = P_x c~_k. Projections, stops, iterations

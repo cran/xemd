@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Mask frequency of the 2005 masking (eq-mascaras-frecuencia-original,
 # mascaras.model:52-60): nu = sum(A_1 nu_1^2) / sum(A_1 nu_1), with A_1 and nu_1
 # the instantaneous amplitude and frequency of the first IMF without mask,

@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-FileCopyrightText: 2019 Vinícius Carvalho
+# SPDX-FileCopyrightText: 2019 Eduardo Mazoni
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Adapted from ewtpy, revision f9ff38bc5cd7859eea58c5b29099f8a503792b63.
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2019 Vinícius Carvalho & Eduardo Mazoni

@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-FileCopyrightText: 2022 Stefano Bianchi
+# SPDX-FileCopyrightText: 2022 Alessandro Longo
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Adapted from pytvfemd 0.3.14 (Stefano Bianchi and Alessandro Longo), GPL-3;
 # modified for xemd on 2026-10-11.
 # SPDX-License-Identifier: GPL-3.0-or-later

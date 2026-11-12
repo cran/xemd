@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # First vector mode E_1 by sifting (memd.model:54-62, :102-108): h_0 is the
 # signal and h_{s+1} = h_s - m[h_s]. With envelope "trajectory" the mean is
 # (1 / D) sum_d e_d over the envelopes of the trajectory at the maxima of its

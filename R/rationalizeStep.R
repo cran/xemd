@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Rational sampling interval 1 / Fs, with Fs the smallest 2^a 5^b not below
 # 1 / step once 1 / step is lowered by 16 machine epsilons relative to
 # max(1, 1 / step); Fs is stored as an integer when it fits. Adapted from

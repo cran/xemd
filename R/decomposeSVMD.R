@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Successive variational mode decomposition (vmd.extensiones.es.qmd:165-350) of
 # a signal sampled every samplingInterval seconds. Mode L is extracted from the
 # whole signal with the centers of modes 1, ..., L - 1 fixed

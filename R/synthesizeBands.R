@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-FileCopyrightText: 2024 Jerome Gilles
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # Adapted from pyewt, revision 9d60a340f34e92356ed4f7a6a8b7044f524455e3.
 # SPDX-License-Identifier: MIT
 # MIT License

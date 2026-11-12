@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Alejandro Daniel Verri <averri@fi.uba.ar>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Part of xemd: free software under the GNU Affero General Public License, version 3 or later, see <https://www.gnu.org/licenses/>.
+# Text and data mining reserved for any use not licensed under the AGPL-3: see <https://kanameishi.github.io/tdm-policy.html>.
 # First intrinsic mode function E_1 of a signal by sifting (emd.model:9-82,
 # :104-226; ceemdan.model:9-15): h_0 is the signal and h_{j+1} = h_j - m_j,
 # with m_j the mean of the envelopes of h_j. The extrema and envelopes of each

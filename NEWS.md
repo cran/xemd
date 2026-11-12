@@ -1,3 +1,7 @@
+## xemd 0.1.7
+
+- `LICENSE.note` is retired, and every source file carries its SPDX header.
+
 ## xemd 0.1.6
 
 - Licence changed from GPL-3 to AGPL (>= 3). The new `LICENSE.note` states
